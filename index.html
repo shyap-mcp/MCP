@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CanvasPrints — Your photos. Gallery-grade.</title>
+<meta name="description" content="Museum-grade canvas prints, hand-stretched and delivered across Malaysia in 3–5 days. Free retouching on every order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- Global nav (pure black, per Apple global-nav) -->
+<header class="global-nav">
+  <div class="gn-inner">
+    <a href="#top" class="gn-brand">CanvasPrints</a>
+    <nav class="gn-links">
+      <a href="#formats">Formats</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#craft">Craft</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Support</a>
+    </nav>
+    <button class="gn-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#formats">Formats</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#how">How it works</a>
+  <a href="#craft">Craft</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">Support</a>
+  <button class="btn btn-primary" data-open-order>Create yours</button>
+</div>
+
+<!-- Sub-nav (frosted parchment, per Apple sub-nav-frosted) -->
+<nav class="sub-nav">
+  <div class="sub-inner">
+    <a class="cat" href="#top">Canvas Prints</a>
+    <div class="sub-links">
+      <a href="#studio">Studio</a>
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+    </div>
+    <button class="btn btn-primary btn-sub" data-open-order>Create yours</button>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- HERO · white tile -->
+<section class="tile tile-white hero">
+  <div class="wrap center">
+    <p class="caption-strong muted reveal">CanvasPrints Studio</p>
+    <h1 class="hero-display reveal" data-d="1">Your photos.<br>Gallery-grade.</h1>
+    <p class="lead reveal" data-d="2">Museum-grade canvas, hand-stretched over solid pine.<br>Archival inks that keep their colour for decades.</p>
+    <div class="cta-row reveal" data-d="3">
+      <button class="btn btn-primary btn-hero" data-open-order>Start your canvas</button>
+      <a class="btn btn-ghost btn-hero" href="#formats">Explore formats</a>
+    </div>
+    <p class="fine muted trust reveal" data-d="4">★ 4.9 · 2,300+ reviews&nbsp;&nbsp;·&nbsp;&nbsp;50,000+ walls styled&nbsp;&nbsp;·&nbsp;&nbsp;Free retouching&nbsp;&nbsp;·&nbsp;&nbsp;3–5 day delivery</p>
+    <div class="hero-stage">
+      <div class="par" data-parallax="0.5">
+        <div class="canvas-art a1 reveal" data-d="2" id="heroArt"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS · parchment tile, scroll-driven strip -->
+<section class="tile tile-parch formats" id="formats">
+  <div class="stage" id="formatsStage">
+    <div class="sticky-col">
+      <div class="wrap center sec-head">
+        <h2 class="display-lg reveal">One photo. Every format.</h2>
+        <p class="lead-sm reveal" data-d="1">From a quiet accent to a three-panel story — choose the shape of your memory.</p>
+      </div>
+      <div class="fmt-track" id="formatsTrack">
+        <article class="card fmt-card reveal">
+          <div class="art a1"></div>
+          <div class="fmt-row"><h3 class="body-strong">Classic</h3><span class="caption muted">40 × 50 cm</span></div>
+          <p class="fmt-desc">A quiet accent for shelves and hallways.</p>
+          <div class="fmt-foot"><span class="body-strong">RM89</span><button class="tlink" data-open-order data-size="classic">Configure ›</button></div>
+        </article>
+        <article class="card fmt-card reveal" data-d="1">
+          <span class="badge">Most loved</span>
+          <div class="art a2"></div>
+          <div class="fmt-row"><h3 class="body-strong">Statement</h3><span class="caption muted">50 × 70 cm</span></div>
+          <p class="fmt-desc">The everyday hero. Fits above the sofa almost too perfectly.</p>
+          <div class="fmt-foot"><span class="body-strong">RM139</span><button class="tlink" data-open-order data-size="statement">Configure ›</button></div>
+        </article>
+        <article class="card fmt-card reveal" data-d="2">
+          <div class="art a3"></div>
+          <div class="fmt-row"><h3 class="body-strong">Grand</h3><span class="caption muted">60 × 90 cm</span></div>
+          <p class="fmt-desc">For walls with ambition. Unmissable across the room.</p>
+          <div class="fmt-foot"><span class="body-strong">RM199</span><button class="tlink" data-open-order data-size="grand">Configure ›</button></div>
+        </article>
+        <article class="card fmt-card reveal" data-d="3">
+          <div class="art a4"></div>
+          <div class="fmt-row"><h3 class="body-strong">Triptych</h3><span class="caption muted">3 × 40 × 60 cm</span></div>
+          <p class="fmt-desc">One story in three acts. Panoramas never looked this good.</p>
+          <div class="fmt-foot"><span class="body-strong">RM329</span><button class="tlink" data-open-order data-size="triptych">Configure ›</button></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY · white tile -->
+<section class="tile tile-white gallery" id="gallery">
+  <div class="wrap-wide">
+    <div class="sec-head center">
+      <h2 class="display-lg reveal">Seen on real walls.</h2>
+      <p class="lead-sm reveal" data-d="1">A few favourites from homes across Malaysia.</p>
+    </div>
+    <div class="gal-grid">
+      <figure class="gal-item reveal" style="--ar:4/5"><div class="gal-art a2"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">Golden hour</span><span class="caption muted">Kuala Lumpur</span></figcaption></figure>
+      <figure class="gal-item reveal" data-d="1" style="--ar:1/1"><div class="gal-art a3"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">Straits light</span><span class="caption muted">Penang</span></figcaption></figure>
+      <figure class="gal-item reveal" data-d="2" style="--ar:4/5"><div class="gal-art a4"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">Green &amp; mist</span><span class="caption muted">Cameron Highlands</span></figcaption></figure>
+      <figure class="gal-item reveal" data-d="1" style="--ar:3/4"><div class="gal-art a5"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">Lantern nights</span><span class="caption muted">Melaka</span></figcaption></figure>
+      <figure class="gal-item reveal" data-d="2" style="--ar:1/1"><div class="gal-art a6"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">First light</span><span class="caption muted">Kota Kinabalu</span></figcaption></figure>
+      <figure class="gal-item reveal" data-d="3" style="--ar:4/3"><div class="gal-art a1"></div><span class="gal-chip" data-open-order>Shop this look</span><figcaption><span class="caption-strong">Monsoon sky</span><span class="caption muted">Kuching</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- HOW · dark tile 1 -->
+<section class="tile tile-dark how" id="how">
+  <div class="wrap">
+    <h2 class="display-lg reveal">Three steps. Zero effort.</h2>
+    <div class="how-grid">
+      <div class="reveal" data-d="1">
+        <p class="caption-strong step-num">01</p>
+        <h3 class="tagline">Upload.</h3>
+        <p class="body-dark">Drag in any photo. We check resolution, colour and crop — and perfect them, free.</p>
+      </div>
+      <div class="reveal" data-d="2">
+        <p class="caption-strong step-num">02</p>
+        <h3 class="tagline">Perfect it.</h3>
+        <p class="body-dark">Choose size, frame and finish. Preview exactly what will arrive. No surprises, ever.</p>
+      </div>
+      <div class="reveal" data-d="3">
+        <p class="caption-strong step-num">03</p>
+        <h3 class="tagline">Delivered.</h3>
+        <p class="body-dark">Hand-stretched, inspected twice, then couriered to your door in 3–5 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT · dark tile 2 (micro-step lighter, per Apple tile system) -->
+<section class="tile tile-dark2 craft" id="craft">
+  <div class="wrap center">
+    <h2 class="display-lg reveal">Obsessed with the details you’ll never see.</h2>
+    <p class="lead-airy reveal" data-d="1">Because you’ll see them every day.</p>
+    <div class="stats">
+      <div class="stat reveal" data-d="1"><p class="stat-n"><span data-count="380">0</span></p><p class="caption muted-dark">gsm archival canvas</p></div>
+      <div class="stat reveal" data-d="2"><p class="stat-n"><span data-count="75">0</span>+</p><p class="caption muted-dark">years of fade resistance</p></div>
+      <div class="stat reveal" data-d="3"><p class="stat-n"><span data-count="2">0</span>×</p><p class="caption muted-dark">hands-on inspection</p></div>
+      <div class="stat reveal" data-d="4"><p class="stat-n"><span data-count="50000">0</span>+</p><p class="caption muted-dark">walls styled in Malaysia</p></div>
+    </div>
+    <ul class="craft-list reveal">
+      <li>Kiln-dried pine frames that never warp</li>
+      <li>HP Latex inks — solvent-free and kid-safe</li>
+      <li>Hand-stretched, corner-locked, drum-tight</li>
+    </ul>
+  </div>
+</section>
+
+<!-- STUDIO · white tile, live configurator -->
+<section class="tile tile-white studio" id="studio">
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2 class="display-lg reveal">Design yours right now.</h2>
+      <p class="lead-sm reveal" data-d="1">Pick a size, pick a frame — watch the price. Upload your photo and we’re off.</p>
+    </div>
+    <div class="studio-grid">
+      <div class="preview-wrap reveal" data-d="1">
+        <div class="studio-art f-mirror" id="studioArt"></div>
+        <p class="caption muted">Live preview · your photo appears here at checkout</p>
+      </div>
+      <div class="controls reveal" data-d="2">
+        <p class="caption-strong ctl">Size</p>
+        <div class="chip-row" id="studioSizes"></div>
+        <p class="caption-strong ctl">Frame</p>
+        <div class="chip-row" id="studioFrames"></div>
+        <p class="caption-strong ctl">Finish</p>
+        <div class="chip-row" id="studioFinishes"></div>
+        <div class="price-row"><span class="caption muted">From</span><span class="tagline" id="studioPrice">RM139</span></div>
+        <button class="btn btn-primary btn-hero" id="studioCta">Continue to order</button>
+        <p class="fine muted">Free delivery over RM150 · Hanging kit included</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Floating sticky bar (per Apple floating-sticky-bar) -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="bar-left">
+    <span class="body-strong" id="barTotal">RM139</span>
+    <span class="caption muted" id="barCfg">Statement · Mirror wrap</span>
+  </div>
+  <button class="btn btn-primary" data-open-order>Start your canvas</button>
+</div>
+
+<!-- PRICING · parchment tile -->
+<section class="tile tile-parch pricing" id="pricing">
+  <div class="wrap-wide">
+    <div class="sec-head center">
+      <h2 class="display-lg reveal">Honest pricing. Beautiful math.</h2>
+      <p class="lead-sm reveal" data-d="1">Retouching, edge wrap and hanging kit included. The price you see is the price you pay.</p>
+    </div>
+    <div class="price-grid">
+      <div class="card price-card reveal" data-d="1">
+        <h3 class="body-strong">Classic</h3>
+        <p class="caption muted">40 × 50 cm</p>
+        <p class="tagline">RM89</p>
+        <ul><li>Free retouching</li><li>Mirror-wrap edges</li><li>Hanging kit included</li><li>3–5 day delivery</li></ul>
+        <button class="btn btn-pearl" data-open-order data-size="classic">Choose Classic</button>
+      </div>
+      <div class="card price-card hot reveal" data-d="2">
+        <span class="badge">Most loved</span>
+        <h3 class="body-strong">Statement</h3>
+        <p class="caption muted">50 × 70 cm</p>
+        <p class="tagline">RM139</p>
+        <ul><li>Free retouching</li><li>Mirror-wrap edges</li><li>Hanging kit included</li><li>3–5 day delivery</li></ul>
+        <button class="btn btn-primary" data-open-order data-size="statement">Choose Statement</button>
+      </div>
+      <div class="card price-card reveal" data-d="3">
+        <h3 class="body-strong">Grand</h3>
+        <p class="caption muted">60 × 90 cm</p>
+        <p class="tagline">RM199</p>
+        <ul><li>Free retouching</li><li>Mirror-wrap edges</li><li>Hanging kit included</li><li>3–5 day delivery</li></ul>
+        <button class="btn btn-pearl" data-open-order data-size="grand">Choose Grand</button>
+      </div>
+      <div class="card price-card reveal" data-d="4">
+        <h3 class="body-strong">Triptych</h3>
+        <p class="caption muted">3 × 40 × 60 cm</p>
+        <p class="tagline">RM329</p>
+        <ul><li>Free retouching</li><li>Mirror-wrap edges</li><li>Hanging kit included</li><li>3–5 day delivery</li></ul>
+        <button class="btn btn-pearl" data-open-order data-size="triptych">Choose Triptych</button>
+      </div>
+    </div>
+    <p class="fine muted center">Free delivery on orders over RM150 · Bulk &amp; interior-designer pricing available</p>
+  </div>
+</section>
+
+<!-- REVIEWS · white tile -->
+<section class="tile tile-white reviews" id="reviews">
+  <div class="wrap-wide">
+    <div class="sec-head center">
+      <h2 class="display-lg reveal">Loved on walls across Malaysia.</h2>
+    </div>
+    <div class="t-grid">
+      <div class="card t-card reveal"><p class="stars">★★★★★</p><p class="body-p">“It doesn’t look like a print. It looks like it was painted.”</p><p class="caption muted">Aina R. · Shah Alam</p></div>
+      <div class="card t-card reveal" data-d="1"><p class="stars">★★★★★</p><p class="body-p">“Ordered Friday evening, hanging on my wall by Monday. The walnut float frame is gorgeous.”</p><p class="caption muted">Marcus T. · Kuala Lumpur</p></div>
+      <div class="card t-card reveal" data-d="2"><p class="stars">★★★★★</p><p class="body-p">“Support helped me pick the right crop at 11pm. Who does that?”</p><p class="caption muted">Priya S. · Penang</p></div>
+      <div class="card t-card reveal"><p class="stars">★★★★★</p><p class="body-p">“Gifted a triptych for my parents’ anniversary. There were tears. Good ones.”</p><p class="caption muted">Hafiz K. · Johor Bahru</p></div>
+      <div class="card t-card reveal" data-d="1"><p class="stars">★★★★★</p><p class="body-p">“Third order this year. My house is becoming a gallery.”</p><p class="caption muted">Emily C. · Petaling Jaya</p></div>
+      <div class="card t-card reveal" data-d="2"><p class="stars">★★★★★</p><p class="body-p">“The colours are unreal. My wedding photo finally got the stage it deserved.”</p><p class="caption muted">Nurul A. · Klang</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ · dark tile 1 -->
+<section class="tile tile-dark faq" id="faq">
+  <div class="wrap-narrow">
+    <h2 class="display-lg reveal">Questions, answered.</h2>
+    <details class="card-dark faq-item reveal" data-d="1">
+      <summary>What photo resolution do I need?</summary>
+      <p class="body-dark">If it looks sharp on your phone at full zoom, it will print beautifully. Our system checks resolution as you upload, flags anything risky before you pay — and fixes what it can, free.</p>
+    </details>
+    <details class="card-dark faq-item reveal" data-d="2">
+      <summary>How long does delivery take?</summary>
+      <p class="body-dark">3–5 working days, nationwide. East Malaysia typically 4–7. Every order is tracked door-to-door.</p>
+    </details>
+    <details class="card-dark faq-item reveal" data-d="3">
+      <summary>Can you retouch or restore my photo?</summary>
+      <p class="body-dark">Yes — every order includes free professional retouching: colour, cropping, sharpening. Old or damaged photos can be restored too. Just ask.</p>
+    </details>
+    <details class="card-dark faq-item reveal" data-d="4">
+      <summary>What if it arrives damaged?</summary>
+      <p class="body-dark">It won’t — but if it does, we reprint and redeliver free. No forms, no fuss. Love it or we reprint it.</p>
+    </details>
+    <details class="card-dark faq-item reveal" data-d="5">
+      <summary>Can I hang it without drilling?</summary>
+      <p class="body-dark">Every canvas ships with a damage-free hanging kit, and our team can advise on layouts for stairways and gallery walls.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FINAL CTA · pure black tile -->
+<section class="tile tile-black cta">
+  <div class="wrap center">
+    <h2 class="hero-display reveal">Your walls<br>are waiting.</h2>
+    <p class="lead-airy reveal" data-d="1">Turn tonight’s gallery into tomorrow’s morning light.</p>
+    <div class="reveal" data-d="2"><button class="btn btn-primary btn-hero" data-open-order>Start your canvas</button></div>
+    <p class="fine cta-fine reveal" data-d="3">From RM89 · Free retouching · 3–5 day delivery</p>
+  </div>
+</section>
+
+<!-- FOOTER · parchment, dense-link columns per Apple footer -->
+<footer class="footer">
+  <div class="wrap-wide foot-grid">
+    <div class="foot-brand">
+      <p class="tagline">CanvasPrints</p>
+      <p class="caption muted">Memories, masterfully printed.</p>
+      <p class="fine muted">Kuala Lumpur, Malaysia<br>hello@mycanvasprints.com.my</p>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="#formats">Classic 40×50</a>
+      <a href="#formats">Statement 50×70</a>
+      <a href="#formats">Grand 60×90</a>
+      <a href="#formats">Triptych</a>
+      <a href="#pricing">Gift cards</a>
+    </div>
+    <div class="foot-col">
+      <h4>Support</h4>
+      <a href="#faq">Track my order</a>
+      <a href="#faq">Reprint promise</a>
+      <a href="#faq">Care guide</a>
+      <a href="#faq">Contact us</a>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <a href="#craft">Our story</a>
+      <a href="#craft">Materials &amp; craft</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#how">How it works</a>
+    </div>
+  </div>
+  <div class="wrap-wide foot-legal">
+    <p class="fine">© 2025 CanvasPrints · Prototype redesign concept — copy &amp; pricing illustrative.</p>
+    <p class="fine">Design language: Apple (via VoltAgent/awesome-design-md)</p>
+  </div>
+</footer>
+
+</main>
+
+<!-- ORDER MODAL -->
+<div class="modal" id="orderModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <button class="modal-x" data-close aria-label="Close">✕</button>
+    <div class="modal-head">
+      <p class="tagline">Create your canvas</p>
+      <div class="psteps">
+        <span class="pstep"><i>1</i>Photo</span>
+        <span class="pstep"><i>2</i>Size</span>
+        <span class="pstep"><i>3</i>Frame</span>
+        <span class="pstep"><i>4</i>Details</span>
+        <span class="pstep"><i>5</i>Payment</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="flow">
+        <section class="step" data-step="1">
+          <h3 class="tagline">Upload your photo.</h3>
+          <p class="caption muted step-sub">JPG or PNG, up to 50MB. We check resolution and perfect it — free.</p>
+          <div class="dropzone" id="dropzone">
+            <div class="dz-icon">↑</div>
+            <p class="caption-strong">Drop your photo here</p>
+            <p class="caption muted">or click to browse</p>
+            <p class="fine muted" id="dzHint">No photo yet</p>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+          <div class="dz-actions">
+            <button class="btn btn-pearl" id="useDemo">Use demo artwork</button>
+            <span class="fine muted">We never share your photos. Ever.</span>
+          </div>
+        </section>
+        <section class="step" data-step="2">
+          <h3 class="tagline">Choose your size.</h3>
+          <p class="caption muted step-sub">Not sure? Statement (50×70) fits most living rooms.</p>
+          <div class="chip-grid" id="sizeGrid"></div>
+        </section>
+        <section class="step" data-step="3">
+          <h3 class="tagline">Frame &amp; finish.</h3>
+          <p class="caption muted step-sub">The last 5% that makes it look expensive.</p>
+          <div class="chip-grid frames" id="frameList"></div>
+          <p class="caption-strong ctl">Finish</p>
+          <div class="chip-row" id="finishChips"></div>
+        </section>
+        <section class="step" data-step="4">
+          <h3 class="tagline">Where should it go?</h3>
+          <p class="caption muted step-sub">Tracked delivery, 3–5 working days.</p>
+          <div class="f-grid">
+            <div class="field"><label class="caption-strong">Full name</label><input id="name" placeholder="e.g. Aisyah Rahman"></div>
+            <div class="field"><label class="caption-strong">Phone</label><input id="phone" placeholder="012-345 6789"></div>
+            <div class="field full"><label class="caption-strong">Delivery address</label><input id="address" placeholder="Unit, street, building"></div>
+            <div class="field"><label class="caption-strong">City</label><input id="city" placeholder="e.g. Petaling Jaya"></div>
+            <div class="field"><label class="caption-strong">Postcode</label><input id="postcode" placeholder="46300"></div>
+            <div class="field full"><label class="caption-strong">State</label>
+              <select id="stateSel">
+                <option value="">Select state…</option>
+                <option>Kuala Lumpur</option><option>Selangor</option><option>Penang</option><option>Johor</option>
+                <option>Kedah</option><option>Kelantan</option><option>Melaka</option><option>Negeri Sembilan</option>
+                <option>Pahang</option><option>Perak</option><option>Perlis</option><option>Sabah</option>
+                <option>Sarawak</option><option>Terengganu</option><option>Putrajaya</option><option>Labuan</option>
+              </select>
+            </div>
+          </div>
+        </section>
+        <section class="step" data-step="5">
+          <h3 class="tagline">Payment.</h3>
+          <p class="caption muted step-sub">All major Malaysian methods supported.</p>
+          <div class="pay-grid" id="payList"></div>
+          <p class="fine muted">Demo prototype — no payment is processed.</p>
+        </section>
+        <section class="step success" data-step="6">
+          <div class="ok-ring">✓</div>
+          <h3 class="tagline">It’s ordered.</h3>
+          <p class="body-p">Estimated delivery: <b id="okEta"></b>.<br>We’ll WhatsApp you a photo of your canvas before it ships.</p>
+          <div class="card sum-mini">
+            <div class="sum-line"><span class="caption muted">Order</span><b id="okNum"></b></div>
+            <div class="sum-line"><span class="caption muted">Total paid</span><b id="okTotal"></b></div>
+          </div>
+          <button class="btn btn-primary" data-close>Back to CanvasPrints</button>
+        </section>
+      </div>
+      <aside class="summary">
+        <div class="sum-thumb" id="sumThumb"></div>
+        <div class="sum-line"><span class="caption muted">Size</span><span id="sumSize">—</span></div>
+        <div class="sum-line"><span class="caption muted">Frame</span><span id="sumFrame">—</span></div>
+        <div class="sum-line"><span class="caption muted">Finish</span><span id="sumFinish">—</span></div>
+        <div class="sum-line"><span class="caption muted">Qty</span>
+          <span class="qty"><button id="qtyMinus">−</button><b id="sumQty">1</b><button id="qtyPlus">+</button></span>
+        </div>
+        <div class="rule"></div>
+        <div class="sum-line"><span class="caption muted">Subtotal</span><span id="sumSub">—</span></div>
+        <div class="sum-line"><span class="caption muted">Delivery</span><span id="sumDel">—</span></div>
+        <div class="sum-line total"><span class="body-strong">Total</span><span class="body-strong" id="sumTotal">—</span></div>
+        <p class="fine muted">✓ Love it or we reprint it</p>
+      </aside>
+    </div>
+    <div class="modal-bar" id="modalBar">
+      <div class="bar-left">
+        <span class="body-strong" id="barTotalM">RM139</span>
+        <span class="caption muted" id="barCfgM">Statement · Mirror wrap · Matte</span>
+      </div>
+      <div class="bar-right">
+        <button class="tlink" id="backBtn">Back</button>
+        <button class="btn btn-primary" id="nextBtn">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
