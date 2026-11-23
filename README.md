@@ -17,6 +17,8 @@ Open `index.html` in any browser — no build step, no dependencies.
 | `assets/css/styles.css` | Apple token implementation (colors, type scale, radii, frosted bars) |
 | `assets/js/app.js` | Order flow, pricing engine, scroll motion, configurator |
 | `DESIGN.md` | The brand design system (Stitch DESIGN.md format) — drop it into any AI agent |
+| `preview.html` | Token & component catalog — light surfaces (colors, type, buttons, chips, cards, forms, bars, radius/shadow, do's & don'ts) |
+| `preview-dark.html` | Same catalog on dark tiles (tile system, Sky Link Blue rules, card-dark, FAQ, dark sticky bar) |
 
 ## Highlights
 

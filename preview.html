@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CanvasPrints — Design Preview (Light)</title>
+<style>
+:root{
+  --blue:#0066cc; --bf:#0071e3; --sky:#2997ff;
+  --ink:#1d1d1f; --ink80:#333333; --ink48:#7a7a7a;
+  --canvas:#ffffff; --parch:#f5f5f7; --pearl:#fafafc;
+  --t1:#272729; --t2:#2a2a2c; --t3:#252527; --black:#000000;
+  --chip:rgba(210,210,215,.64); --hair:#e0e0e0; --div:#f0f0f0;
+  --prod-shadow:3px 5px 30px rgba(0,0,0,.22);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.47;letter-spacing:-.374px;color:var(--ink);background:var(--canvas);-webkit-font-smoothing:antialiased}
+.wrap{width:min(960px,92vw);margin:0 auto}
+header{padding:96px 0 64px;background:var(--parch)}
+.kicker{font-size:12px;font-weight:600;letter-spacing:-.12px;color:var(--blue);margin-bottom:14px}
+h1{font-size:clamp(28px,5vw,56px);font-weight:600;line-height:1.07;letter-spacing:-.28px}
+.lede{font-size:clamp(19px,2.2vw,24px);font-weight:300;line-height:1.5;color:var(--ink80);margin:16px 0 10px;max-width:60ch}
+.fine{font-size:12px;line-height:1.43;letter-spacing:-.12px;color:var(--ink48)}
+.sec{padding:56px 0;border-top:1px solid var(--div)}
+.sec:first-of-type{border-top:0}
+.sec-head{margin-bottom:28px}
+.sec-no{font-size:14px;font-weight:600;color:var(--blue);letter-spacing:0}
+.sec-title{font-size:21px;font-weight:600;letter-spacing:.231px;margin:4px 0 6px}
+.sec-sub{font-size:14px;color:var(--ink48);max-width:70ch}
+.grid{display:grid;gap:16px}
+.swatches{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
+.sw-chip{height:64px;border-radius:8px;border:1px solid var(--hair)}
+.sw-name{font-size:14px;font-weight:600;letter-spacing:-.224px;margin-top:8px}
+.sw-hex{font-family:var(--mono);font-size:12px;color:var(--ink48);margin:2px 0}
+.sw-role{font-size:12px;line-height:1.43;color:var(--ink48)}
+.type-row{display:grid;grid-template-columns:280px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--div);align-items:center}
+.type-row:first-child{border-top:0}
+.tn{font-size:14px;font-weight:600;letter-spacing:-.224px}
+.spec{font-family:var(--mono);font-size:12px;color:var(--ink48);margin-top:4px;line-height:1.5}
+.t-hero{font-size:clamp(28px,5vw,56px);font-weight:600;line-height:1.07;letter-spacing:-.28px}
+.t-disp{font-size:clamp(24px,4vw,40px);font-weight:600;line-height:1.1}
+.t-lead{font-size:clamp(19px,2.4vw,28px);font-weight:400;line-height:1.14;letter-spacing:.196px}
+.t-airy{font-size:24px;font-weight:300;line-height:1.5}
+.t-tag{font-size:21px;font-weight:600;letter-spacing:.231px}
+.t-body{font-size:17px;line-height:1.47}
+.t-bstrong{font-size:17px;font-weight:600;line-height:1.24}
+.t-cap{font-size:14px;line-height:1.43;letter-spacing:-.224px}
+.t-capb{font-size:14px;font-weight:600;letter-spacing:-.224px}
+.t-fine{font-size:12px;letter-spacing:-.12px}
+.t-nav{font-size:12px;letter-spacing:-.12px;color:var(--ink48)}
+.t-dense a{display:block;font-size:17px;line-height:2.41;color:var(--ink80)}
+.btnrow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.cell{display:grid;gap:8px;justify-items:start}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:9999px;font-size:17px;font-weight:400;letter-spacing:-.374px;padding:11px 22px;white-space:nowrap;transition:transform .15s cubic-bezier(.25,.1,.25,1),background-color .2s;border:0;cursor:pointer}
+.btn:active{transform:scale(.95)}
+.btn:focus-visible{outline:2px solid var(--bf);outline-offset:2px}
+.b-pri{background:var(--blue);color:#fff}.b-pri:hover{background:var(--bf)}
+.b-gho{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.b-hero{padding:14px 28px;font-weight:300;font-size:18px;letter-spacing:0}
+.b-uti{background:var(--ink);color:#fff;font-size:14px;letter-spacing:-.224px;border-radius:8px;padding:8px 15px}
+.b-pea{background:var(--pearl);color:var(--ink80);font-size:14px;letter-spacing:-.224px;border-radius:11px;padding:8px 14px;border:3px solid var(--div)}
+.b-note{font-size:12px;color:var(--ink48);line-height:1.5;max-width:230px}
+.tlink{color:var(--blue);font-size:17px;letter-spacing:-.374px;background:none;border:0;cursor:pointer}
+.tlink:hover{text-decoration:underline}
+.chiprow{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.chip{display:inline-flex;flex-direction:column;gap:2px;align-items:flex-start;background:var(--canvas);border:1px solid var(--hair);border-radius:9999px;padding:11px 15px;font-size:14px;letter-spacing:-.224px;line-height:1.3;cursor:pointer;transition:transform .15s cubic-bezier(.25,.1,.25,1)}
+.chip:active{transform:scale(.95)}
+.chip small{font-size:12px;color:var(--ink48);letter-spacing:-.12px}
+.chip b{font-weight:600}
+.chip.on{border:2px solid var(--bf);padding:10px 14px}
+.pstep{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:9999px;border:1px solid var(--hair);font-size:14px;letter-spacing:-.224px;color:var(--ink48);background:var(--canvas)}
+.pstep i{font-style:normal;width:20px;height:20px;border-radius:9999px;background:var(--div);color:var(--ink48);display:grid;place-items:center;font-size:11px}
+.pstep.on{color:var(--ink);box-shadow:inset 0 0 0 1px var(--bf)}.pstep.on i{background:var(--bf);color:#fff}
+.pstep.done{color:var(--blue)}.pstep.done i{background:var(--blue);color:#fff}
+.cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--canvas);border:1px solid var(--hair);border-radius:18px;padding:24px;display:grid;gap:10px;justify-items:start;position:relative}
+.card .art{width:100%;aspect-ratio:1/1;border-radius:8px;box-shadow:var(--prod-shadow);position:relative}
+.card .art::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.2),transparent 45%),radial-gradient(120% 80% at 50% 115%,rgba(0,0,0,.22),transparent 60%)}
+.badge{position:absolute;top:-12px;right:20px;background:var(--pearl);border:3px solid var(--div);color:var(--ink80);font-size:12px;font-weight:600;letter-spacing:-.12px;padding:4px 12px;border-radius:9999px}
+.dims{font-size:14px;letter-spacing:-.224px;color:var(--ink48)}
+.price{font-size:21px;font-weight:600;letter-spacing:.231px}
+.feats{display:grid;gap:6px}
+.feats li{font-size:14px;letter-spacing:-.224px;color:var(--ink80);list-style:none}
+.feats li::before{content:"✓";color:var(--blue);font-weight:600;margin-right:8px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;font-weight:600;letter-spacing:-.224px;color:var(--ink80)}
+.field input,.field select{width:100%;padding:12px 16px;border:1px solid var(--hair);border-radius:11px;font:inherit;font-size:17px;letter-spacing:-.374px;background:var(--canvas);color:var(--ink)}
+.field input:focus{border-color:var(--bf);outline:none}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:560px}
+.dropzone{border:1.5px dashed rgba(0,0,0,.15);border-radius:18px;padding:36px 24px;text-align:center;display:grid;justify-items:center;gap:6px;background:var(--canvas)}
+.dz-icon{width:44px;height:44px;border-radius:9999px;background:var(--chip);display:grid;place-items:center;font-size:18px}
+.bars{display:grid;gap:20px}
+.bar-demo{background:rgba(245,245,247,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--hair);border-radius:18px;height:64px;display:flex;align-items:center;padding:12px 24px;gap:16px}
+.bar-left{display:flex;align-items:baseline;gap:12px;margin-right:auto;min-width:0}
+.bar-right{display:flex;align-items:center;gap:16px}
+.radius-grid{display:flex;flex-wrap:wrap;gap:20px}
+.rad{width:104px}
+.rad-box{height:80px;background:var(--parch);border:1px solid var(--hair)}
+.rad b{display:block;font-size:14px;font-weight:600;margin-top:8px}
+.rad span{font-size:12px;color:var(--ink48);font-family:var(--mono)}
+.shadow-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:8px}
+.sh{display:grid;gap:8px}
+.sh-box{height:140px;border-radius:2px}
+.sh-label{font-size:12px;color:var(--ink48);line-height:1.5}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.rules ul{display:grid;gap:10px}
+.rules li{font-size:14px;letter-spacing:-.224px;line-height:1.5;color:var(--ink80);list-style:none}
+.rules li::before{content:"✓";color:var(--blue);font-weight:600;margin-right:8px}
+.rules .dont li::before{content:"✕";color:var(--ink48)}
+.artgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.a1{background:radial-gradient(120% 90% at 20% 12%,#ffd98a 0%,transparent 55%),radial-gradient(90% 80% at 85% 30%,#ff7a59 0%,transparent 60%),linear-gradient(160deg,#f7b267,#f4845f 45%,#b75d49)}
+.a2{background:radial-gradient(100% 80% at 70% 15%,#a8dadc 0%,transparent 55%),radial-gradient(120% 90% at 20% 85%,#457b9d 0%,transparent 60%),linear-gradient(150deg,#9ad0c2,#3d708f 55%,#1d3557)}
+.a3{background:radial-gradient(90% 70% at 30% 20%,#e9f5db 0%,transparent 55%),radial-gradient(110% 90% at 80% 80%,#99c48e 0%,transparent 60%),linear-gradient(150deg,#cfe8b6,#7fa86f 55%,#3f5d3a)}
+.a4{background:radial-gradient(80% 60% at 70% 20%,#ffd166 0%,transparent 55%),radial-gradient(110% 90% at 25% 75%,#ef476f 0%,transparent 62%),linear-gradient(155deg,#f78ca0,#b7336b 60%,#5c1a3a)}
+.a5{background:radial-gradient(90% 70% at 25% 25%,#c3f0f7 0%,transparent 55%),radial-gradient(100% 80% at 80% 75%,#5e60ce 0%,transparent 60%),linear-gradient(150deg,#98d7e8,#5e60ce 60%,#2b2d64)}
+.a6{background:radial-gradient(90% 70% at 60% 20%,#ffe08a 0%,transparent 55%),radial-gradient(110% 90% at 20% 80%,#6a4c93 0%,transparent 62%),linear-gradient(150deg,#e0aaff,#7d4f9e 55%,#2f2350)}
+.art-tile{height:110px;border-radius:8px;box-shadow:var(--prod-shadow);position:relative}
+.art-tile::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.2),transparent 45%)}
+footer{padding:40px 0 64px;border-top:1px solid var(--div)}
+@media(max-width:640px){.type-row{grid-template-columns:1fr;gap:8px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">CanvasPrints · DESIGN.md visual catalog</p>
+    <h1>Design preview</h1>
+    <p class="lede">Every token and component in the system, rendered on light surfaces.</p>
+    <p class="fine">Derived from Apple design language (VoltAgent/awesome-design-md · apple/DESIGN.md). Pair with <b>DESIGN.md</b> in this repo. Dark surfaces: <b>preview-dark.html</b>.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">01</p><h2 class="sec-title">Color palette &amp; roles</h2><p class="sec-sub">One interactive accent. Surfaces alternate white ↔ parchment ↔ near-black; the color change is the section divider.</p></div>
+    <div class="grid swatches">
+      <div><div class="sw-chip" style="background:#0066cc"></div><p class="sw-name">Action Blue</p><p class="sw-hex">#0066CC</p><p class="sw-role">Primary — every interactive element</p></div>
+      <div><div class="sw-chip" style="background:#0071e3"></div><p class="sw-name">Focus Blue</p><p class="sw-hex">#0071E3</p><p class="sw-role">Focus rings · selected chips</p></div>
+      <div><div class="sw-chip" style="background:#2997ff"></div><p class="sw-name">Sky Link Blue</p><p class="sw-hex">#2997FF</p><p class="sw-role">Links on dark tiles only</p></div>
+      <div><div class="sw-chip" style="background:#1d1d1f"></div><p class="sw-name">Ink</p><p class="sw-hex">#1D1D1F</p><p class="sw-role">Headlines &amp; body on light</p></div>
+      <div><div class="sw-chip" style="background:#333333"></div><p class="sw-name">Ink 80</p><p class="sw-hex">#333333</p><p class="sw-role">Secondary text</p></div>
+      <div><div class="sw-chip" style="background:#7a7a7a"></div><p class="sw-name">Ink 48</p><p class="sw-hex">#7A7A7A</p><p class="sw-role">Muted · captions · disabled</p></div>
+      <div><div class="sw-chip" style="background:#ffffff"></div><p class="sw-name">Canvas</p><p class="sw-hex">#FFFFFF</p><p class="sw-role">Dominant surface</p></div>
+      <div><div class="sw-chip" style="background:#f5f5f7"></div><p class="sw-name">Parchment</p><p class="sw-hex">#F5F5F7</p><p class="sw-role">Alt tiles · footer · frosted bars</p></div>
+      <div><div class="sw-chip" style="background:#fafafc"></div><p class="sw-name">Pearl</p><p class="sw-hex">#FAFAFC</p><p class="sw-role">Secondary button fill</p></div>
+      <div><div class="sw-chip" style="background:#272729"></div><p class="sw-name">Tile 1</p><p class="sw-hex">#272729</p><p class="sw-role">Dark tile surface</p></div>
+      <div><div class="sw-chip" style="background:#2a2a2c"></div><p class="sw-name">Tile 2</p><p class="sw-hex">#2A2A2C</p><p class="sw-role">Adjacent dark · dark cards</p></div>
+      <div><div class="sw-chip" style="background:#252527"></div><p class="sw-name">Tile 3</p><p class="sw-hex">#252527</p><p class="sw-role">Bottom darks · video frames</p></div>
+      <div><div class="sw-chip" style="background:#000000"></div><p class="sw-name">Black</p><p class="sw-hex">#000000</p><p class="sw-role">Global nav · final CTA void</p></div>
+      <div><div class="sw-chip" style="background:rgba(210,210,215,.64)"></div><p class="sw-name">Chip Gray</p><p class="sw-hex">rgba(210,210,215,.64)</p><p class="sw-role">Circular chips over imagery</p></div>
+      <div><div class="sw-chip" style="background:#e0e0e0"></div><p class="sw-name">Hairline</p><p class="sw-hex">#E0E0E0</p><p class="sw-role">1px borders</p></div>
+      <div><div class="sw-chip" style="background:#f0f0f0"></div><p class="sw-name">Divider Soft</p><p class="sw-hex">#F0F0F0</p><p class="sw-role">Soft dividers · pearl ring</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">02</p><h2 class="sec-title">Content palette — canvas artwork</h2><p class="sec-sub">Gradients are content ("photography"), never UI chrome. Classes .a1–.a6; swap for real photography in production.</p></div>
+    <div class="grid artgrid">
+      <div><div class="art-tile a1"></div><p class="sw-name">a1 · Golden hour</p></div>
+      <div><div class="art-tile a2"></div><p class="sw-name">a2 · Straits light</p></div>
+      <div><div class="art-tile a3"></div><p class="sw-name">a3 · Green &amp; mist</p></div>
+      <div><div class="art-tile a4"></div><p class="sw-name">a4 · Lantern nights</p></div>
+      <div><div class="art-tile a5"></div><p class="sw-name">a5 · First light</p></div>
+      <div><div class="art-tile a6"></div><p class="sw-name">a6 · Monsoon sky</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">03</p><h2 class="sec-title">Typography</h2><p class="sec-sub">SF Pro Display ≥19px / SF Pro Text below. Weight ladder 300/400/600 — 500 is deliberately absent. Body is 17px, never 16px.</p></div>
+    <div class="type-row"><div><p class="tn">hero-display</p><p class="spec">56px · 600 · 1.07 · -0.28px</p></div><p class="t-hero">Your photos. Gallery-grade.</p></div>
+    <div class="type-row"><div><p class="tn">display-lg</p><p class="spec">40px · 600 · 1.10 · 0</p></div><p class="t-disp">One photo. Every format.</p></div>
+    <div class="type-row"><div><p class="tn">lead</p><p class="spec">28px · 400 · 1.14 · +0.196px</p></div><p class="t-lead">Museum-grade canvas, hand-stretched over solid pine.</p></div>
+    <div class="type-row"><div><p class="tn">lead-airy</p><p class="spec">24px · 300 · 1.5 · 0 — rare</p></div><p class="t-airy">Because you'll see them every day.</p></div>
+    <div class="type-row"><div><p class="tn">tagline</p><p class="spec">21px · 600 · 1.19 · +0.231px</p></div><p class="t-tag">Create your canvas</p></div>
+    <div class="type-row"><div><p class="tn">body</p><p class="spec">17px · 400 · 1.47 · -0.374px</p></div><p class="t-body">Hand-stretched, inspected twice, then couriered to your door in 3–5 days. No surprises, ever.</p></div>
+    <div class="type-row"><div><p class="tn">body-strong</p><p class="spec">17px · 600 · 1.24</p></div><p class="t-bstrong">Statement</p></div>
+    <div class="type-row"><div><p class="tn">caption / caption-strong</p><p class="spec">14px · 400|600 · -0.224px</p></div><p><span class="t-cap">50 × 70 cm&nbsp;&nbsp;·&nbsp;&nbsp;</span><span class="t-capb">Free retouching on every order</span></p></div>
+    <div class="type-row"><div><p class="tn">fine-print / nav-link</p><p class="spec">12px · -0.12px</p></div><p><span class="t-fine">© 2025 CanvasPrints&nbsp;&nbsp;·&nbsp;&nbsp;</span><span class="t-nav">Formats&nbsp; Gallery&nbsp; Pricing</span></p></div>
+    <div class="type-row"><div><p class="tn">dense-link</p><p class="spec">17px · 400 · 2.41 — footer columns</p></div><div class="t-dense"><a>Classic 40×50</a><a>Statement 50×70</a></div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">04</p><h2 class="sec-title">Buttons</h2><p class="sec-sub">Two grammars: blue pills (actions) and compact utility rects. Press = scale(0.95) everywhere. Focus ring 2px #0071E3.</p></div>
+    <div class="btnrow">
+      <div class="cell"><button class="btn b-pri">Continue</button><p class="b-note">button-primary · pill · #0066CC · 11×22 · 17/400</p></div>
+      <div class="cell"><button class="btn b-gho">Explore formats</button><p class="b-note">button-secondary-pill · ghost, 1px border</p></div>
+      <div class="cell"><button class="btn b-pri b-hero">Start your canvas</button><p class="b-note">button-store-hero · 14×28 · 18/300 (rare weight 300)</p></div>
+      <div class="cell"><button class="btn b-uti">Sign in</button><p class="b-note">button-dark-utility · 8px radius · 14/400</p></div>
+      <div class="cell"><button class="btn b-pea">Use demo artwork</button><p class="b-note">button-pearl-capsule · 11px radius · 3px divider ring</p></div>
+      <div class="cell"><button class="tlink">Configure ›</button><p class="b-note">text-link · Action Blue · underline on hover</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">05</p><h2 class="sec-title">Configurator chips &amp; step indicators</h2><p class="sec-sub">Pill tappable cells. Selected state: 2px solid #0071E3. Price deltas render in Action Blue.</p></div>
+    <div class="chiprow">
+      <button class="chip"><b>Classic</b><small>40 × 50 cm · RM89</small></button>
+      <button class="chip on"><b>Statement</b><small>50 × 70 cm · RM139</small></button>
+      <button class="chip"><b>Walnut float</b><small>Warm wood; the art appears to float. <b style="color:#0066cc">+RM49</b></small></button>
+    </div>
+    <p class="sec-sub" style="margin:24px 0 12px">Order-flow progress chips (Photo → Size → Frame → Details → Payment):</p>
+    <div class="chiprow">
+      <span class="pstep done"><i>1</i>Photo</span>
+      <span class="pstep on"><i>2</i>Size</span>
+      <span class="pstep"><i>3</i>Frame</span>
+      <span class="pstep"><i>4</i>Details</span>
+      <span class="pstep"><i>5</i>Payment</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">06</p><h2 class="sec-title">Cards</h2><p class="sec-sub">store-utility-card: white, 1px hairline, 18px radius, 24px padding. No shadow — imagery carries the single product shadow.</p></div>
+    <div class="grid cards">
+      <div class="card">
+        <span class="badge">Most loved</span>
+        <div class="art a2"></div>
+        <p class="tn">Statement</p><p class="dims">50 × 70 cm</p>
+        <ul class="feats"><li>Free retouching</li><li>Mirror-wrap edges</li><li>3–5 day delivery</li></ul>
+        <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><span class="price">RM139</span><button class="tlink">Configure ›</button></div>
+      </div>
+      <div class="card">
+        <div class="art a3"></div>
+        <p class="tn">Grand</p><p class="dims">60 × 90 cm</p>
+        <ul class="feats"><li>Free retouching</li><li>Hanging kit included</li><li>3–5 day delivery</li></ul>
+        <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><span class="price">RM199</span><button class="tlink">Configure ›</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">07</p><h2 class="sec-title">Inputs &amp; upload</h2><p class="sec-sub">11px radius fields, hairline borders, blue focus border. Dropzone: 18px radius, dashed, pearl on hover.</p></div>
+    <div class="formgrid">
+      <div class="field"><label>Full name</label><input placeholder="e.g. Aisyah Rahman"></div>
+      <div class="field"><label>Phone</label><input placeholder="012-345 6789"></div>
+      <div class="field"><label>State</label><select><option>Selangor</option><option>Kuala Lumpur</option></select></div>
+    </div>
+    <div class="dropzone" style="margin-top:20px;max-width:420px">
+      <div class="dz-icon">↑</div>
+      <p class="tn">Drop your photo here</p>
+      <p class="dims">or click to browse — JPG or PNG, up to 50MB</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">08</p><h2 class="sec-title">Floating sticky bars</h2><p class="sec-sub">Parchment @ 80% + saturate(180%) blur(20px). Left: running total. Right: primary pill. Used on-page and inside checkout.</p></div>
+    <div class="bars">
+      <div class="bar-demo">
+        <div class="bar-left"><span class="tn">RM139</span><span class="dims">Statement · Mirror wrap</span></div>
+        <div class="bar-right"><button class="btn b-pri">Start your canvas</button></div>
+      </div>
+      <div class="bar-demo">
+        <div class="bar-left"><span class="tn">RM188</span><span class="dims">Statement · Walnut float · Matte</span></div>
+        <div class="bar-right"><span class="tlink" style="font-size:14px">Back</span><button class="btn b-pri">Pay RM188</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">09</p><h2 class="sec-title">Radius &amp; the one shadow</h2><p class="sec-sub">Radii grammars never mix. Exactly one drop-shadow exists in the system — reserved for canvas imagery.</p></div>
+    <div class="radius-grid">
+      <div class="rad"><div class="rad-box" style="border-radius:8px"></div><b>sm</b><span>8px</span></div>
+      <div class="rad"><div class="rad-box" style="border-radius:11px"></div><b>md</b><span>11px</span></div>
+      <div class="rad"><div class="rad-box" style="border-radius:18px"></div><b>lg</b><span>18px</span></div>
+      <div class="rad"><div class="rad-box" style="border-radius:9999px"></div><b>pill</b><span>9999px</span></div>
+    </div>
+    <div class="shadow-wrap">
+      <div class="sh"><div class="sh-box a1" style="box-shadow:var(--prod-shadow)"></div><p class="sh-label"><b>product-shadow</b> — rgba(0,0,0,.22) 3px 5px 30px. Canvas imagery only. Never on cards, buttons, or text.</p></div>
+      <div class="sh"><div class="sh-box" style="background:var(--canvas);border:1px solid var(--hair);border-radius:18px"></div><p class="sh-label"><b>flat card</b> — elevation comes from surface change and hairlines, not shadows.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">10</p><h2 class="sec-title">Do's &amp; Don'ts</h2></div>
+    <div class="rules">
+      <div><ul>
+        <li>Use Action Blue for every interactive element — nothing else</li>
+        <li>Headlines 600 weight, negative tracking; body 17px/1.47</li>
+        <li>Press feedback: scale(0.95) · focus rings 2px #0071E3</li>
+        <li>Alternate surfaces for section rhythm — the color change is the divider</li>
+        <li>Frosted sticky bars carry price + CTA through the flow</li>
+      </ul></div>
+      <div class="dont"><ul>
+        <li>No second accent color, ever</li>
+        <li>No shadows on cards, buttons, or text — imagery only</li>
+        <li>No decorative gradients in UI chrome (artwork gradients are content)</li>
+        <li>No weight 500 · no rounded full-bleed tiles</li>
+        <li>Sky Link Blue (#2997FF) only on dark surfaces — never on light</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="fine">CanvasPrints design preview · light surfaces · tokens per DESIGN.md · Source spec: apple/DESIGN.md (VoltAgent/awesome-design-md)</p>
+  </div>
+</footer>
+
+</body>
+</html>

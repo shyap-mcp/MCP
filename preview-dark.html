@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CanvasPrints — Design Preview (Dark)</title>
+<style>
+:root{
+  --blue:#0066cc; --bf:#0071e3; --sky:#2997ff;
+  --ink:#1d1d1f; --wht:#ffffff; --mut:#cccccc;
+  --t1:#272729; --t2:#2a2a2c; --t3:#252527; --black:#000000;
+  --haird:rgba(255,255,255,.12); --chip:rgba(210,210,215,.64);
+  --prod-shadow:3px 5px 30px rgba(0,0,0,.45);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.47;letter-spacing:-.374px;color:var(--wht);background:var(--t1);-webkit-font-smoothing:antialiased}
+.wrap{width:min(960px,92vw);margin:0 auto}
+header{padding:96px 0 64px;background:var(--black)}
+.kicker{font-size:12px;font-weight:600;letter-spacing:-.12px;color:var(--sky);margin-bottom:14px}
+h1{font-size:clamp(28px,5vw,56px);font-weight:600;line-height:1.07;letter-spacing:-.28px}
+.lede{font-size:clamp(19px,2.2vw,24px);font-weight:300;line-height:1.5;color:var(--mut);margin:16px 0 10px;max-width:60ch}
+.fine{font-size:12px;line-height:1.43;letter-spacing:-.12px;color:rgba(255,255,255,.55)}
+.sec{padding:56px 0;border-top:1px solid var(--haird)}
+.sec:first-of-type{border-top:0}
+.sec-head{margin-bottom:28px}
+.sec-no{font-size:14px;font-weight:600;color:var(--sky);letter-spacing:0}
+.sec-title{font-size:21px;font-weight:600;letter-spacing:.231px;margin:4px 0 6px}
+.sec-sub{font-size:14px;color:var(--mut);max-width:70ch}
+.grid{display:grid;gap:16px}
+.swatches{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
+.sw-chip{height:64px;border-radius:8px;border:1px solid var(--haird)}
+.sw-name{font-size:14px;font-weight:600;letter-spacing:-.224px;margin-top:8px}
+.sw-hex{font-family:var(--mono);font-size:12px;color:var(--mut);margin:2px 0}
+.sw-role{font-size:12px;line-height:1.43;color:var(--mut)}
+.type-row{display:grid;grid-template-columns:280px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--haird);align-items:center}
+.type-row:first-child{border-top:0}
+.tn{font-size:14px;font-weight:600;letter-spacing:-.224px}
+.spec{font-family:var(--mono);font-size:12px;color:var(--mut);margin-top:4px;line-height:1.5}
+.t-hero{font-size:clamp(28px,5vw,56px);font-weight:600;line-height:1.07;letter-spacing:-.28px;color:#fff}
+.t-disp{font-size:clamp(24px,4vw,40px);font-weight:600;line-height:1.1;color:#fff}
+.t-lead{font-size:clamp(19px,2.4vw,28px);font-weight:400;line-height:1.14;letter-spacing:.196px;color:#fff}
+.t-airy{font-size:24px;font-weight:300;line-height:1.5;color:var(--mut)}
+.t-stat{font-size:clamp(34px,4vw,56px);font-weight:600;line-height:1.07;letter-spacing:-.28px;color:#fff}
+.t-body{font-size:17px;line-height:1.47;color:var(--mut)}
+.t-cap{font-size:14px;letter-spacing:-.224px;color:var(--mut)}
+.tlink-d{color:var(--sky);font-size:17px;letter-spacing:-.374px;background:none;border:0;cursor:pointer}
+.tlink-d:hover{text-decoration:underline}
+.btnrow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.cell{display:grid;gap:8px;justify-items:start}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:9999px;font-size:17px;font-weight:400;letter-spacing:-.374px;padding:11px 22px;white-space:nowrap;transition:transform .15s cubic-bezier(.25,.1,.25,1);border:0;cursor:pointer}
+.btn:active{transform:scale(.95)}
+.btn:focus-visible{outline:2px solid var(--bf);outline-offset:2px}
+.b-pri{background:var(--blue);color:#fff}.b-pri:hover{background:var(--bf)}
+.b-gho{background:transparent;color:var(--sky);border:1px solid var(--sky)}
+.b-hero{padding:14px 28px;font-weight:300;font-size:18px;letter-spacing:0}
+.b-note{font-size:12px;color:var(--mut);line-height:1.5;max-width:230px}
+.chiprow{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.chip{display:inline-flex;flex-direction:column;gap:2px;align-items:flex-start;background:var(--t2);border:1px solid var(--haird);border-radius:9999px;padding:11px 15px;font-size:14px;letter-spacing:-.224px;line-height:1.3;cursor:pointer;transition:transform .15s cubic-bezier(.25,.1,.25,1)}
+.chip:active{transform:scale(.95)}
+.chip small{font-size:12px;color:var(--mut);letter-spacing:-.12px}
+.chip b{font-weight:600}
+.chip.on{border:2px solid var(--bf);padding:10px 14px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--t2);border:1px solid var(--haird);border-radius:18px;padding:24px;display:grid;gap:10px;justify-items:start;position:relative}
+.card .art{width:100%;aspect-ratio:1/1;border-radius:8px;box-shadow:var(--prod-shadow);position:relative}
+.card .art::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.2),transparent 45%),radial-gradient(120% 80% at 50% 115%,rgba(0,0,0,.35),transparent 60%)}
+.dims{font-size:14px;letter-spacing:-.224px;color:var(--mut)}
+.price{font-size:21px;font-weight:600;letter-spacing:.231px}
+.steps{display:grid;gap:0;margin-top:8px}
+.step{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--haird);align-items:baseline}
+.step:first-child{border-top:0}
+.step-num{font-size:14px;font-weight:600;color:var(--sky);min-width:32px}
+.step .tn{margin-bottom:6px}
+.faq{max-width:640px}
+.faq-item{background:var(--t2);border:1px solid var(--haird);border-radius:18px;padding:20px 24px;margin-bottom:14px}
+.faq-item summary{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:17px;font-weight:600;letter-spacing:-.374px;color:#fff}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";color:var(--sky);font-size:22px;font-weight:400}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{margin-top:12px;color:var(--mut);font-size:17px}
+.bar-demo{background:rgba(39,39,41,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--haird);border-radius:18px;height:64px;display:flex;align-items:center;padding:12px 24px;gap:16px}
+.bar-left{display:flex;align-items:baseline;gap:12px;margin-right:auto;min-width:0}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.rules ul{display:grid;gap:10px}
+.rules li{font-size:14px;letter-spacing:-.224px;line-height:1.5;color:var(--mut);list-style:none}
+.rules li::before{content:"✓";color:var(--sky);font-weight:600;margin-right:8px}
+.rules .dont li::before{content:"✕";color:rgba(255,255,255,.4)}
+.a1{background:radial-gradient(120% 90% at 20% 12%,#ffd98a 0%,transparent 55%),radial-gradient(90% 80% at 85% 30%,#ff7a59 0%,transparent 60%),linear-gradient(160deg,#f7b267,#f4845f 45%,#b75d49)}
+.a4{background:radial-gradient(80% 60% at 70% 20%,#ffd166 0%,transparent 55%),radial-gradient(110% 90% at 25% 75%,#ef476f 0%,transparent 62%),linear-gradient(155deg,#f78ca0,#b7336b 60%,#5c1a3a)}
+.a5{background:radial-gradient(90% 70% at 25% 25%,#c3f0f7 0%,transparent 55%),radial-gradient(100% 80% at 80% 75%,#5e60ce 0%,transparent 60%),linear-gradient(150deg,#98d7e8,#5e60ce 60%,#2b2d64)}
+footer{padding:40px 0 64px;border-top:1px solid var(--haird)}
+@media(max-width:640px){.type-row{grid-template-columns:1fr;gap:8px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">CanvasPrints · DESIGN.md visual catalog</p>
+    <h1>Design preview — dark</h1>
+    <p class="lede">The same system at dark-tile volume: near-black surfaces, Sky Link Blue, muted body.</p>
+    <p class="fine">Per apple/DESIGN.md: Action Blue pills work unchanged on dark tiles; inline links switch to Sky Link Blue; secondary copy drops to #CCCCCC.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">01</p><h2 class="sec-title">Dark surfaces &amp; on-dark text</h2><p class="sec-sub">Adjacent dark tiles separate by a micro-step in lightness (tile-1 → tile-2). Pure black is reserved for nav and the final CTA void.</p></div>
+    <div class="grid swatches">
+      <div><div class="sw-chip" style="background:#272729"></div><p class="sw-name">Tile 1</p><p class="sw-hex">#272729</p><p class="sw-role">Primary dark tile</p></div>
+      <div><div class="sw-chip" style="background:#2a2a2c"></div><p class="sw-name">Tile 2</p><p class="sw-hex">#2A2A2C</p><p class="sw-role">Adjacent dark · dark cards</p></div>
+      <div><div class="sw-chip" style="background:#252527"></div><p class="sw-name">Tile 3</p><p class="sw-hex">#252527</p><p class="sw-role">Bottom darks · players</p></div>
+      <div><div class="sw-chip" style="background:#000000"></div><p class="sw-name">Black</p><p class="sw-hex">#000000</p><p class="sw-role">Global nav · CTA void</p></div>
+      <div><div class="sw-chip" style="background:#ffffff"></div><p class="sw-name">Body on dark</p><p class="sw-hex">#FFFFFF</p><p class="sw-role">Headlines &amp; body</p></div>
+      <div><div class="sw-chip" style="background:#cccccc"></div><p class="sw-name">Muted on dark</p><p class="sw-hex">#CCCCCC</p><p class="sw-role">Secondary copy</p></div>
+      <div><div class="sw-chip" style="background:#2997ff"></div><p class="sw-name">Sky Link Blue</p><p class="sw-hex">#2997FF</p><p class="sw-role">Inline links on dark only</p></div>
+      <div><div class="sw-chip" style="background:#0066cc"></div><p class="sw-name">Action Blue</p><p class="sw-hex">#0066CC</p><p class="sw-role">Pill CTAs — unchanged on dark</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">02</p><h2 class="sec-title">Typography on dark</h2><p class="sec-sub">Same ladder — white headlines, #CCCCCC secondary. Sky Link Blue marks interactive text.</p></div>
+    <div class="type-row"><div><p class="tn">display-lg</p><p class="spec">40px · 600 · on tile</p></div><p class="t-disp">Three steps. Zero effort.</p></div>
+    <div class="type-row"><div><p class="tn">lead-airy</p><p class="spec">24px · 300 · muted</p></div><p class="t-airy">Because you'll see them every day.</p></div>
+    <div class="type-row"><div><p class="tn">stat-n</p><p class="spec">56px · 600 · -0.28px · white</p></div><p class="t-stat">380 <span style="color:#cccccc">gsm</span></p></div>
+    <div class="type-row"><div><p class="tn">body + link</p><p class="spec">17px · muted · sky link</p></div><p class="t-body">Hand-stretched, corner-locked, drum-tight. <button class="tlink-d">See the craft ›</button></p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">03</p><h2 class="sec-title">Buttons &amp; chips on dark</h2><p class="sec-sub">Primary pills keep Action Blue. Inline links use Sky Link Blue. Chips use tile-2 fill with hairline-dark borders.</p></div>
+    <div class="btnrow">
+      <div class="cell"><button class="btn b-pri">Start your canvas</button><p class="b-note">button-primary — unchanged on dark, per spec</p></div>
+      <div class="cell"><button class="btn b-gho b-hero">Explore formats</button><p class="b-note">ghost pill — Sky Link Blue text/border on dark</p></div>
+    </div>
+    <div class="chiprow" style="margin-top:20px">
+      <button class="chip"><b>Grand</b><small>60 × 90 cm · RM199</small></button>
+      <button class="chip on"><b>Triptych</b><small>3 × 40 × 60 · RM329</small></button>
+      <button class="chip"><b>Noir float <b style="color:#2997ff">+RM49</b></b><small>A matte-black shadow-gap frame.</small></button>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">04</p><h2 class="sec-title">card-dark</h2><p class="sec-sub">Tile-2 fill, hairline-dark border, 18px radius. Imagery keeps the product shadow (deepened for dark).</p></div>
+    <div class="grid cards">
+      <div class="card">
+        <div class="art a5"></div>
+        <p class="tn">First light · Kota Kinabalu</p>
+        <p class="dims">Grand · 60 × 90 cm · Noir float</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><span class="price">RM248</span><button class="tlink-d" style="font-size:14px">Configure ›</button></div>
+      </div>
+      <div class="card">
+        <div class="art a4"></div>
+        <p class="tn">Lantern nights · Melaka</p>
+        <p class="dims">Triptych · 3 × 40 × 60 cm · Mirror wrap</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><span class="price">RM329</span><button class="tlink-d" style="font-size:14px">Configure ›</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">05</p><h2 class="sec-title">Steps &amp; FAQ on dark</h2><p class="sec-sub">Step numerals in Sky Link Blue. FAQ accordions: tile-2 cards, rotating +/− glyph.</p></div>
+    <div class="steps">
+      <div class="step"><span class="step-num">01</span><div><p class="tn">Upload.</p><p class="t-body">Drag in any photo. We check resolution, colour and crop — and perfect them, free.</p></div></div>
+      <div class="step"><span class="step-num">02</span><div><p class="tn">Perfect it.</p><p class="t-body">Choose size, frame and finish. Preview exactly what will arrive.</p></div></div>
+      <div class="step"><span class="step-num">03</span><div><p class="tn">Delivered.</p><p class="t-body">Hand-stretched, inspected twice, couriered in 3–5 days.</p></div></div>
+    </div>
+    <div class="faq" style="margin-top:32px">
+      <details class="faq-item" open>
+        <summary>What if it arrives damaged?</summary>
+        <p>It won't — but if it does, we reprint and redeliver free. No forms, no fuss. Love it or we reprint it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I hang it without drilling?</summary>
+        <p>Every canvas ships with a damage-free hanging kit.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">06</p><h2 class="sec-title">Sticky bar — dark variant</h2><p class="sec-sub">Tile-1 @ 80% + saturate(180%) blur(20px). Primary pill unchanged.</p></div>
+    <div class="bar-demo">
+      <div class="bar-left"><span class="tn">RM378</span><span class="dims">Triptych · Mirror wrap · Matte</span></div>
+      <button class="btn b-pri">Pay RM378</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="sec-no">07</p><h2 class="sec-title">Do's &amp; Don'ts on dark</h2></div>
+    <div class="rules">
+      <div><ul>
+        <li>Sky Link Blue (#2997FF) for inline links — Action Blue would disappear on tiles</li>
+        <li>Secondary copy at #CCCCCC — white would be too loud</li>
+        <li>Adjacent darks: micro-step tile-1 → tile-2 for separation</li>
+        <li>Deepen the product shadow slightly for dark surfaces</li>
+      </ul></div>
+      <div class="dont"><ul>
+        <li>Never use Sky Link Blue on light surfaces</li>
+        <li>No new accent colors on dark — pills stay Action Blue</li>
+        <li>No hairline-colored text — keep body ≥ #CCCCCC</li>
+        <li>Don't lighten tile fills beyond the micro-step system</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="fine">CanvasPrints design preview · dark surfaces · tokens per DESIGN.md · Source spec: apple/DESIGN.md (VoltAgent/awesome-design-md)</p>
+  </div>
+</footer>
+
+</body>
+</html>
